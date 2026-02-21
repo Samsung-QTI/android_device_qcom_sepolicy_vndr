@@ -100,7 +100,9 @@ hal_client_domain(vendor_nicmd, vendor_hal_perf);
 use_shsusrd_socket(vendor_nicmd)
 
 # Allow nicmd to use the connectivity_native library
+not_recovery(`
 get_prop(vendor_nicmd, boot_status_prop)
 allow vendor_nicmd connectivity_native_service:service_manager find;
 binder_call(vendor_nicmd, connectivity_native_service)
 binder_call(vendor_nicmd, system_server)
+')
